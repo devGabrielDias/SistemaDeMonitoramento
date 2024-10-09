@@ -49,7 +49,7 @@ public class DadosDiariosController {
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("/del-dadosdiarios{id}")
+    @DeleteMapping("/del-dadosdiarios/{id}")
     public ResponseEntity<Void> remover(@PathVariable int id) {
         dadosDiariosFacade.remover(id);
 

@@ -31,10 +31,9 @@ public class ObservacoesMedicas {
     @Column(name = "observacao")
     private String observacao;
 
-    public ObservacoesMedicas(int id, Paciente paciente, Medico medico, Date data, String observacao) {
+
+    public ObservacoesMedicas(int id, Date data, String observacao) {
         this.id = id;
-        //this.paciente = paciente;
-        //this.medico = medico;
         this.data = data;
         this.observacao = observacao;
     }

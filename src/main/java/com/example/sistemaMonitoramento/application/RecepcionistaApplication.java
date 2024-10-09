@@ -1,8 +1,7 @@
 package com.example.sistemaMonitoramento.application;
 
-import com.example.sistemaMonitoramento.entities.Paciente;
+
 import com.example.sistemaMonitoramento.entities.Recepcionista;
-import com.example.sistemaMonitoramento.interfaces.IPacienteRepository;
 import com.example.sistemaMonitoramento.interfaces.IRecepcionistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,15 +9,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RecepcionistaApplication  {
+public class RecepcionistaApplication {
 
     private IRecepcionistaRepository recepcionistaRepository;
 
     @Autowired
-    public RecepcionistaApplication(IRecepcionistaRepository recepcionistaRepository) {this.recepcionistaRepository = recepcionistaRepository;}
+    public RecepcionistaApplication(IRecepcionistaRepository recepcionistaRepository) {
+        this.recepcionistaRepository = recepcionistaRepository;
+    }
 
     public void adicionar(Recepcionista recepcionista) {
-        this.recepcionistaRepository.adicionar(recepcionista);
+        try {
+            this.recepcionistaRepository.adicionar(recepcionista);
+        } catch (Exception e) {
+            // Logando a exceção para entender o erro
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao adicionar recepcionista", e);
+        }
     }
 
     public void remover(int id) {this.recepcionistaRepository.remover(id);}

@@ -35,14 +35,14 @@ public class ClinicaController {
         return ResponseEntity.ok(clinica);
     }
 
-    @PutMapping("/add-clinica/{id}")
+    @PutMapping("/up-clinica/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Clinica clinica) {
         clinicaFacade.atualizarClinica(id, clinica);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/nova-clinica")
+    @PostMapping("/add-clinica")
     public ResponseEntity<Void> adicionar(@RequestBody Clinica clinica) {
         clinicaFacade.adicionar(clinica);
 

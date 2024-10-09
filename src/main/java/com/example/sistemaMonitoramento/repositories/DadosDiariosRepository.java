@@ -4,6 +4,7 @@ import com.example.sistemaMonitoramento.entities.DadosDiarios;
 import com.example.sistemaMonitoramento.entities.Paciente;
 import com.example.sistemaMonitoramento.interfaces.IDadosDiariosRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.util.List;
 @Repository
 public class DadosDiariosRepository implements IDadosDiariosRepository {
 
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional

@@ -36,7 +36,7 @@ public class Medico {
     @Column(name = "crm")
     private String crm;
 
-    public Medico(Integer id, String nome, String especialidade, String contato, Clinica clinica, String email, String senha, String crm) {
+    public Medico(Integer id, String nome, String especialidade, String contato, String email, String senha, String crm) {
         this.id = id;
         this.nome = nome;
         this.especialidade = especialidade;

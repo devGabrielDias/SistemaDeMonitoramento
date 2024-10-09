@@ -22,7 +22,7 @@ public class Comorbidade {
     private String descricao;
 
 
-    public Comorbidade(int id, String nome, String descricao, List<Paciente> pacientes) {
+    public Comorbidade(int id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;

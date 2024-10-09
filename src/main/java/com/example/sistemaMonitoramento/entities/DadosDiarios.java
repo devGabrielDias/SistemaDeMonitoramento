@@ -35,7 +35,7 @@ public class DadosDiarios {
     @Column(name = "outras_medicacoes")
     private String outrasMedicacoes;
 
-    public DadosDiarios(int id, Paciente paciente, Date data, String horarioMedicacao, String descricaoDia, String desconforto, String outrasMedicacoes) {
+    public DadosDiarios(int id, Date data, String horarioMedicacao, String descricaoDia, String desconforto, String outrasMedicacoes) {
         this.id = id;
         this.data = data;
         this.horarioMedicacao = horarioMedicacao;

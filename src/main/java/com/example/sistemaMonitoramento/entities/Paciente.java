@@ -52,6 +52,7 @@ import jakarta.persistence.*;
             this.senha = senha;
         }
 
+
         public int getId() {
             return id;
         }

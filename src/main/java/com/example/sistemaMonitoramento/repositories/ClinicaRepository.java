@@ -3,6 +3,7 @@ package com.example.sistemaMonitoramento.repositories;
 import com.example.sistemaMonitoramento.entities.Clinica;
 import com.example.sistemaMonitoramento.interfaces.IClinicaRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Repository
 public class ClinicaRepository implements IClinicaRepository {
+
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired

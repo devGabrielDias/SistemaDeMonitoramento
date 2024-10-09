@@ -35,14 +35,14 @@ public class ComorbidadeController {
         return ResponseEntity.ok(comorbidade);
     }
 
-    @PutMapping("/add-comorbidade/{id}")
+    @PutMapping("/up-comorbidade/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Comorbidade comorbidade) {
         comorbidadeFacade.atualizarComorbidade(id, comorbidade);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/nova-comorbidade")
+    @PostMapping("/add-comorbidade")
     public ResponseEntity<Void> adicionar(@RequestBody Comorbidade comorbidade) {
         comorbidadeFacade.adicionar(comorbidade);
 
