@@ -2,8 +2,11 @@ package com.example.sistemaMonitoramento.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "medicos")
+@Table(name = "medico")
 public class Medico {
 
     public Medico() {
@@ -24,9 +27,6 @@ public class Medico {
     @Column(name = "contato")
     private String contato;
 
-    //@JoinColumn(name = "id_clinica", nullable = false)
-    //private Clinica clinica;
-
     @Column(name = "email")
     private String email;
 
@@ -36,12 +36,21 @@ public class Medico {
     @Column(name = "crm")
     private String crm;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "clinica_id", referencedColumnName = "id")
+    private Clinica clinica;
+
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
+    private List<Medico> medicos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
+    private List<ObservacoesMedicas> observacoesMedicas = new ArrayList<>();
+
     public Medico(Integer id, String nome, String especialidade, String contato, String email, String senha, String crm) {
         this.id = id;
         this.nome = nome;
         this.especialidade = especialidade;
         this.contato = contato;
-        //this.clinica = clinica;
         this.email = email;
         this.senha = senha;
         this.crm = crm;
@@ -102,4 +111,13 @@ public class Medico {
     public void setCrm(String crm) {
         this.crm = crm;
     }
+
+    public Clinica getClinica() {
+        return clinica;
+    }
+
+    public void setClinica(Clinica clinica) {
+        this.clinica = clinica;
+    }
+
 }

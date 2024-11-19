@@ -1,5 +1,7 @@
 package com.example.sistemaMonitoramento.repositories;
 
+import com.example.sistemaMonitoramento.entities.Clinica;
+import com.example.sistemaMonitoramento.entities.Comorbidade;
 import com.example.sistemaMonitoramento.entities.DadosDiarios;
 import com.example.sistemaMonitoramento.entities.Paciente;
 import com.example.sistemaMonitoramento.interfaces.IDadosDiariosRepository;
@@ -20,7 +22,11 @@ public class DadosDiariosRepository implements IDadosDiariosRepository {
     @Transactional
     @Override
     public void adicionar(DadosDiarios dadosDiarios) {
-        this.entityManager.persist(dadosDiarios);
+        Paciente paciente = entityManager.find(Paciente.class, dadosDiarios.getPaciente().getId());
+        dadosDiarios.setPaciente(paciente);
+
+        entityManager.persist(dadosDiarios);
+//        this.entityManager.persist(dadosDiarios);
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.example.sistemaMonitoramento.repositories;
 
 
+import com.example.sistemaMonitoramento.entities.Clinica;
 import com.example.sistemaMonitoramento.entities.Recepcionista;
 import com.example.sistemaMonitoramento.interfaces.IRecepcionistaRepository;
 import jakarta.persistence.EntityManager;
@@ -20,7 +21,11 @@ public class RecepcionistaRepository implements IRecepcionistaRepository {
     @Transactional
     @Override
     public void adicionar(Recepcionista recepcionista) {
-        this.entityManager.persist(recepcionista);
+        Clinica clinica = entityManager.find(Clinica.class, recepcionista.getClinica().getId());
+        recepcionista.setClinica(clinica);
+
+        entityManager.persist(recepcionista);
+//        this.entityManager.persist(recepcionista);
     }
 
     @Transactional

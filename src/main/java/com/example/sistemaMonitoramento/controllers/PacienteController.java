@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController()
+@RequestMapping("/paciente")
 public class PacienteController {
 
     private final PacienteFacade pacienteFacade;

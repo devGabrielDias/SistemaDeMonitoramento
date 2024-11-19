@@ -2,10 +2,11 @@ package com.example.sistemaMonitoramento.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "comorbidades")
+@Table(name = "comorbidade")
 public class Comorbidade {
     public Comorbidade (){
 
@@ -21,6 +22,8 @@ public class Comorbidade {
     @Column(name = "descricao")
     private String descricao;
 
+    @OneToMany(mappedBy = "comorbidade", cascade = CascadeType.ALL)
+    private List<Paciente> pacientes = new ArrayList<>();
 
     public Comorbidade(int id, String nome, String descricao) {
         this.id = id;

@@ -1,5 +1,7 @@
 package com.example.sistemaMonitoramento.repositories;
 
+import com.example.sistemaMonitoramento.entities.Clinica;
+import com.example.sistemaMonitoramento.entities.Comorbidade;
 import com.example.sistemaMonitoramento.entities.Paciente;
 import com.example.sistemaMonitoramento.interfaces.IPacienteRepository;
 import jakarta.persistence.EntityManager;
@@ -19,7 +21,14 @@ public class PacienteRepository implements IPacienteRepository {
     @Transactional
     @Override
     public void adicionar(Paciente paciente) {
-        this.entityManager.persist(paciente);
+        Clinica clinica = entityManager.find(Clinica.class, paciente.getClinica().getId());
+        paciente.setClinica(clinica);
+
+        Comorbidade comorbidade = entityManager.find(Comorbidade.class, paciente.getComorbidade().getId());
+        paciente.setComorbidade(comorbidade);
+
+        entityManager.persist(paciente);
+//        this.entityManager.persist(paciente);
     }
 
     @Transactional

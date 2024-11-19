@@ -1,17 +1,17 @@
 package com.example.sistemaMonitoramento.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-
+@JsonInclude(JsonInclude.Include.ALWAYS)
 @Entity
-@Table(name = "clinicas")
+@Table(name = "clinica")
 public class Clinica {
 
-    public Clinica (){
 
-    }
 
     @Id
     @Column(name = "id")
@@ -26,6 +26,19 @@ public class Clinica {
 
     @Column(name = "telefone")
     private String telefone;
+
+    @OneToMany(mappedBy = "clinica", cascade = CascadeType.ALL)
+    private List<Paciente> pacientes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "clinica", cascade = CascadeType.ALL)
+    private List<Medico> medicos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "clinica", cascade = CascadeType.ALL)
+    private List<Recepcionista> recepcionistas = new ArrayList<>();
+
+    public Clinica (){
+
+    }
 
     public Clinica(int id, String nome, String endereco, String telefone) {
         this.id = id;

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "observacoesmedicas")
+@Table(name = "observacoesmedica")
 public class ObservacoesMedicas {
 
     public ObservacoesMedicas() {
@@ -17,20 +17,19 @@ public class ObservacoesMedicas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //@ManyToOne
-    //@JoinColumn(name = "id_paciente", nullable = false)
-    //private Paciente paciente;
-
-    //@ManyToOne
-    //@JoinColumn(name = "id_medico", nullable = false)
-    //private Medico medico;
-
     @Column(name = "data", nullable = false)
     private Date data;
 
     @Column(name = "observacao")
     private String observacao;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id")
+    private Paciente paciente;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "medico_id", referencedColumnName = "id")
+    private Medico medico;
 
     public ObservacoesMedicas(int id, Date data, String observacao) {
         this.id = id;
@@ -60,5 +59,21 @@ public class ObservacoesMedicas {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 }

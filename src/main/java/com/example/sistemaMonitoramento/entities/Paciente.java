@@ -2,9 +2,12 @@ package com.example.sistemaMonitoramento.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
-    @Entity
-    @Table(name = "pacientes")
+
+@Entity
+    @Table(name = "paciente")
     public class Paciente {
 
         public Paciente() {
@@ -22,9 +25,6 @@ import jakarta.persistence.*;
         @Column(name = "idade", nullable = false)
         private int idade;
 
-        //@Column(name = "historico_medico")
-        //private String historicoMedico;
-
         @Column(name = "contato")
         private String contato;
 
@@ -34,19 +34,24 @@ import jakarta.persistence.*;
         @Column(name = "senha")
         private String senha;
 
+        @ManyToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "clinica_id", referencedColumnName = "id")
+        private Clinica clinica;
 
-        //@JoinColumn(name = "id_comorbidade")
-        //private Comorbidade comorbidade;
+        @ManyToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "comorbidade_id", referencedColumnName = "id")
+        private Comorbidade comorbidade;
 
+        @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+        private List<DadosDiarios> dadosDiarios = new ArrayList<>();
 
-        //@JoinColumn(name = "id_clinica")
-        //private Clinica clinica;
+        @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+        private List<ObservacoesMedicas> observacoesMedicas = new ArrayList<>();
 
         public Paciente(int id, String nome, int idade, String contato, String email, String senha) {
             this.id = id;
             this.nome = nome;
             this.idade = idade;
-            //this.historicoMedico = historicoMedico;
             this.contato = contato;
             this.email = email;
             this.senha = senha;
@@ -109,20 +114,20 @@ import jakarta.persistence.*;
             this.senha = senha;
         }
 
-       // public Comorbidade getComorbidade() {
-       //     return comorbidade;
-        //}
+        public Clinica getClinica() {
+            return clinica;
+        }
 
-        //public void setComorbidade(Comorbidade comorbidade) {
-         //   this.comorbidade = comorbidade;
-        //}
+        public void setClinica(Clinica clinica) {
+            this.clinica = clinica;
+        }
 
-        //public Clinica getClinica() {
-      //      return clinica;
-        //}
+        public Comorbidade getComorbidade() {
+            return comorbidade;
+        }
 
-        //public void setClinica(Clinica clinica) {
-        //    this.clinica = clinica;
-       // }
+        public void setComorbidade(Comorbidade comorbidade) {
+            this.comorbidade = comorbidade;
+        }
     }
 

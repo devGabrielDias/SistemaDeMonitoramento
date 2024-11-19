@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "recepcionistas")
+@Table(name = "recepcionista")
 public class Recepcionista {
 
     public Recepcionista() {
@@ -25,6 +25,9 @@ public class Recepcionista {
     @Column(name = "senha")
     private String senha;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "clinica_id", referencedColumnName = "id")
+    private Clinica clinica;
 
     public Recepcionista(int id, String nome, String email, String senha) {
         this.id = id;
@@ -66,5 +69,12 @@ public class Recepcionista {
         this.senha = senha;
     }
 
+    public Clinica getClinica() {
+        return clinica;
+    }
+
+    public void setClinica(Clinica clinica) {
+        this.clinica = clinica;
+    }
 }
 

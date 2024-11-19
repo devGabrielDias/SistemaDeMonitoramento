@@ -1,5 +1,6 @@
 package com.example.sistemaMonitoramento.repositories;
 
+import com.example.sistemaMonitoramento.entities.Medico;
 import com.example.sistemaMonitoramento.entities.ObservacoesMedicas;
 import com.example.sistemaMonitoramento.entities.Paciente;
 import com.example.sistemaMonitoramento.interfaces.IObservacoesMedicasRepository;
@@ -19,7 +20,15 @@ public class ObservacoesMedicasRepository implements IObservacoesMedicasReposito
     @Transactional
     @Override
     public void adicionar(ObservacoesMedicas observacoesMedicas) {
-        this.entityManager.persist(observacoesMedicas);
+        Paciente paciente = entityManager.find(Paciente.class, observacoesMedicas.getPaciente().getId());
+        observacoesMedicas.setPaciente(paciente);
+
+        Medico medico = entityManager.find(Medico.class, observacoesMedicas.getMedico().getId());
+        observacoesMedicas.setMedico(medico);
+
+        entityManager.persist(observacoesMedicas);
+
+//        this.entityManager.persist(observacoesMedicas);
     }
 
     @Transactional

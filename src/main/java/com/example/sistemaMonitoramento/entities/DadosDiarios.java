@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "dadosdiarios")
+@Table(name = "dadosdiario")
 public class DadosDiarios {
 
     public DadosDiarios() {
@@ -34,6 +34,11 @@ public class DadosDiarios {
 
     @Column(name = "outras_medicacoes")
     private String outrasMedicacoes;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id")
+    private Paciente paciente;
+
 
     public DadosDiarios(int id, Date data, String horarioMedicacao, String descricaoDia, String desconforto, String outrasMedicacoes) {
         this.id = id;
@@ -90,5 +95,13 @@ public class DadosDiarios {
 
     public void setDesconforto(String desconforto) {
         this.desconforto = desconforto;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 }
