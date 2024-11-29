@@ -38,9 +38,8 @@ import java.util.List;
         @JoinColumn(name = "clinica_id", referencedColumnName = "id")
         private Clinica clinica;
 
-        @ManyToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "comorbidade_id", referencedColumnName = "id")
-        private Comorbidade comorbidade;
+        @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+        private List<Comorbidade> comorbidades;
 
         @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
         private List<DadosDiarios> dadosDiarios = new ArrayList<>();
@@ -122,12 +121,6 @@ import java.util.List;
             this.clinica = clinica;
         }
 
-        public Comorbidade getComorbidade() {
-            return comorbidade;
-        }
 
-        public void setComorbidade(Comorbidade comorbidade) {
-            this.comorbidade = comorbidade;
-        }
-    }
+}
 

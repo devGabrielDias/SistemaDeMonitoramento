@@ -22,8 +22,9 @@ public class Comorbidade {
     @Column(name = "descricao")
     private String descricao;
 
-    @OneToMany(mappedBy = "comorbidade", cascade = CascadeType.ALL)
-    private List<Paciente> pacientes = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "paciente_id", referencedColumnName = "id")
+    private Paciente paciente;
 
     public Comorbidade(int id, String nome, String descricao) {
         this.id = id;

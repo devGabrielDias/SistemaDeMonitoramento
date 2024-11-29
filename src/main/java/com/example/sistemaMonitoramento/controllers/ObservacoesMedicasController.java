@@ -20,14 +20,14 @@ public class ObservacoesMedicasController{
         this.observacoesMedicasFacade = observacoesMedicasFacade;
     }
 
-    @GetMapping("/buscar-observacoesmedicas")
+    @GetMapping("/observacoesmedicas")
     public ResponseEntity<List<ObservacoesMedicas>> buscarTodos() {
         List<ObservacoesMedicas> observacoesMedicas = observacoesMedicasFacade.buscarTodos();
 
         return ResponseEntity.ok(observacoesMedicas);
     }
 
-    @GetMapping("/buscar-observacao/{id}")
+    @GetMapping("/observacaomedica/{id}")
     public ResponseEntity<ObservacoesMedicas> buscarPorId(@PathVariable int id) {
         ObservacoesMedicas observacoesMedicas = observacoesMedicasFacade.buscarPorId(id);
         if (observacoesMedicas == null)
@@ -36,21 +36,21 @@ public class ObservacoesMedicasController{
         return ResponseEntity.ok(observacoesMedicas);
     }
 
-    @PutMapping("/up-observacao/{id}")
+    @PutMapping("/observacaomedica/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody ObservacoesMedicas observacoesMedicas) {
         observacoesMedicasFacade.atualizarObservacoesMedicas(id, observacoesMedicas);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/add-observacao")
+    @PostMapping("/observacaomedica")
     public ResponseEntity<Void> adicionar(@RequestBody ObservacoesMedicas observacoesMedicas) {
         observacoesMedicasFacade.adicionar(observacoesMedicas);
 
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("/del-observacao/{id}")
+    @DeleteMapping("/observacaomedica/{id}")
     public ResponseEntity<Void> remover(@PathVariable int id) {
         observacoesMedicasFacade.remover(id);
 
