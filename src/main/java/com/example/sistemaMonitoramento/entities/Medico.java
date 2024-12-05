@@ -36,18 +36,15 @@ public class Medico {
     @Column(name = "crm")
     private String crm;
 
-    //@Column(name = "enabled")
-    //private boolean enabled;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "clinica_id", referencedColumnName = "id")
     private Clinica clinica;
 
-    //@OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
-    //private List<Medico> medicos = new ArrayList<>();
-
     @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
     private List<ObservacoesMedicas> observacoesMedicas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL)
+    private List<Consulta> consultas = new ArrayList<>();
 
     public Medico(Integer id, String nome, String especialidade, String contato, String email, String senha, String crm, boolean enabled) {
         this.id = id;

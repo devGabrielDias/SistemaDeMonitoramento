@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/recepcionista")
+@RequestMapping("/recepcionista/")
 public class RecepcionistaController {
 
     private final RecepcionistaFacade recepcionistaFacade;
@@ -22,14 +22,14 @@ public class RecepcionistaController {
         this.recepcionistaFacade = recepcionistaFacade;
     }
 
-    @GetMapping("/recepcionistas")
+    @GetMapping("recepcionistas/")
     public ResponseEntity<List<Recepcionista>> buscarTodos() {
         List<Recepcionista> recepcionistas = recepcionistaFacade.buscarTodos();
 
         return ResponseEntity.ok(recepcionistas);
     }
 
-    @GetMapping("/recepcionista/{id}")
+    @GetMapping("recepcionista/{id}")
     public ResponseEntity<Recepcionista> buscarPorId(@PathVariable int id) {
         Recepcionista recepcionista = recepcionistaFacade.buscarPorId(id);
         if (recepcionista == null)
@@ -38,21 +38,21 @@ public class RecepcionistaController {
         return ResponseEntity.ok(recepcionista);
     }
 
-    @PutMapping("/recepcionista/{id}")
+    @PutMapping("recepcionista/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Recepcionista recepcionista) {
         recepcionistaFacade.atualizarRecepcionista(id, recepcionista);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/recepcionista")
+    @PostMapping("recepcionista/")
     public ResponseEntity<Void> adicionar(@RequestBody Recepcionista recepcionista) {
         recepcionistaFacade.adicionar(recepcionista);
 
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("/recepcionista/{id}")
+    @DeleteMapping("recepcionista/{id}")
     public ResponseEntity<Void> remover(@PathVariable int id) {
         recepcionistaFacade.remover(id);
 

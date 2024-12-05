@@ -3,6 +3,7 @@ package com.example.sistemaMonitoramento.repositories;
 import com.example.sistemaMonitoramento.entities.Clinica;
 import com.example.sistemaMonitoramento.entities.Comorbidade;
 import com.example.sistemaMonitoramento.entities.Paciente;
+import com.example.sistemaMonitoramento.entities.User;
 import com.example.sistemaMonitoramento.interfaces.IPacienteRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/medico")
+@RequestMapping("/medico/")
 public class MedicoController{
 
     private final MedicoFacade medicoFacade;
@@ -20,14 +20,14 @@ public class MedicoController{
         this.medicoFacade = medicoFacade;
     }
 
-    @GetMapping("/medicos")
+    @GetMapping("medicos/")
     public ResponseEntity<List<Medico>> buscarTodos() {
         List<Medico> medicos = medicoFacade.buscarTodos();
 
         return ResponseEntity.ok(medicos);
     }
 
-    @GetMapping("/medico/{id}")
+    @GetMapping("medico/{id}")
     public ResponseEntity<Medico> buscarPorId(@PathVariable int id) {
         Medico medico = medicoFacade.buscarPorId(id);
         if (medico == null)
@@ -36,21 +36,21 @@ public class MedicoController{
         return ResponseEntity.ok(medico);
     }
 
-    @PutMapping("/medico/{id}")
+    @PutMapping("medico/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Medico medico) {
         medicoFacade.atualizarMedico(id, medico);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/medico")
+    @PostMapping("medico/")
     public ResponseEntity<Void> adicionar(@RequestBody Medico medico) {
         medicoFacade.adicionar(medico);
 
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("/medico/{id}")
+    @DeleteMapping("medico/{id}")
     public ResponseEntity<Void> remover(@PathVariable int id) {
         medicoFacade.remover(id);
 

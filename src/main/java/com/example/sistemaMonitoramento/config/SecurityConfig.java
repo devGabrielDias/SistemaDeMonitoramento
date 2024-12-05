@@ -19,33 +19,38 @@ import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        jdbcUserDetailsManager.setUsersByUsernameQuery("SELECT username, password, enabled FROM user where username = ?");
-
-        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select username, role from user inner join role on user.id = role.user_id where username = ?");
+        jdbcUserDetailsManager.setUsersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username = ?");
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "SELECT u.username, r.role FROM user u INNER JOIN role r ON u.id = r.user_id WHERE u.username = ?"
+        );
 
         return jdbcUserDetailsManager;
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(configurer -> {
-            configurer
-                    .requestMatchers(HttpMethod.GET, "/medicos").hasRole("MEDICO")
-                    .requestMatchers(HttpMethod.GET, "/api/teachers/**").hasRole("TEACHER")
-                    .requestMatchers(HttpMethod.POST, "/api/teachers/").hasRole("COORDINATOR")
-                    .requestMatchers(HttpMethod.PUT, "/api/teachers/**").hasRole("COORDINATOR")
-                    .requestMatchers(HttpMethod.DELETE, "/api/teachers/**").hasRole("ADMIN")
-                    .requestMatchers("/api/users/**").permitAll();
-        });
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(auth -> {
+                    auth
+                            .requestMatchers(HttpMethod.GET, "/consulta/**").hasAnyRole("MEDICO", "PACIENTE")
+                            .requestMatchers(HttpMethod.POST, "/consulta/**").hasRole("RECEPCIONISTA")
+                            .requestMatchers(HttpMethod.GET, "/monitoramento/**").hasRole("MEDICO")
+                            .requestMatchers(HttpMethod.GET, "/paciente/**").hasRole("PACIENTE")
+                            .requestMatchers(HttpMethod.POST, "/paciente/**").hasRole("RECEPCIONISTA")
+                            .anyRequest().authenticated(); // Todas as outras rotas requerem autenticação
+                })
+                .httpBasic(Customizer.withDefaults())
+                .csrf(CsrfDsl::disable); // Desabilitando CSRF para simplificação de teste
 
-        httpSecurity.httpBasic(Customizer.withDefaults());
-
-        httpSecurity.csrf(csrf -> csrf.disable());
-
-        return httpSecurity.build();
+        return http.build();
     }
 }

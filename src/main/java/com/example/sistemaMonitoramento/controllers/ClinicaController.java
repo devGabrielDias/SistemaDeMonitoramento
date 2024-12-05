@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/clinica")
+@RequestMapping("/clinica/")
 public class ClinicaController {
 
     private final ClinicaFacade clinicaFacade;
@@ -20,14 +20,14 @@ public class ClinicaController {
         this.clinicaFacade = clinicaFacade;
     }
 
-    @GetMapping("/clinicas")
+    @GetMapping("clinicas/")
     public ResponseEntity<List<Clinica>> buscarTodos() {
         List<Clinica> clinicas = clinicaFacade.buscarTodos();
 
         return ResponseEntity.ok(clinicas);
     }
 
-    @GetMapping("/clinica/{id}")
+    @GetMapping("clinica/{id}")
     public ResponseEntity<Clinica> buscarPorId(@PathVariable int id) {
         Clinica clinica = clinicaFacade.buscarPorId(id);
         if (clinica == null)
@@ -36,21 +36,21 @@ public class ClinicaController {
         return ResponseEntity.ok(clinica);
     }
 
-    @PutMapping("/clinica/{id}")
+    @PutMapping("clinica/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Clinica clinica) {
         clinicaFacade.atualizarClinica(id, clinica);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/clinica")
+    @PostMapping("clinica/")
     public ResponseEntity<Void> adicionar(@RequestBody Clinica clinica) {
         clinicaFacade.adicionar(clinica);
 
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("/clinica/{id}")
+    @DeleteMapping("clinica/{id}")
     public ResponseEntity<Void> remover(@PathVariable int id) {
         clinicaFacade.remover(id);
 

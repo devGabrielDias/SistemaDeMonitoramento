@@ -42,10 +42,13 @@ import java.util.List;
         private List<Comorbidade> comorbidades;
 
         @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
-        private List<DadosDiarios> dadosDiarios = new ArrayList<>();
+        private List<DadosMonitoramento> dadosMonitoramentos = new ArrayList<>();
 
         @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
         private List<ObservacoesMedicas> observacoesMedicas = new ArrayList<>();
+
+        @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
+        private List<Consulta> consultas = new ArrayList<>();
 
         public Paciente(int id, String nome, int idade, String contato, String email, String senha) {
             this.id = id;
@@ -81,14 +84,6 @@ import java.util.List;
             this.idade = idade;
         }
 
-        //public String getHistoricoMedico() {
-        //    return historicoMedico;
-        //}
-
-       // public void setHistoricoMedico(String historicoMedico) {
-       //     this.historicoMedico = historicoMedico;
-      //  }
-
         public String getContato() {
             return contato;
         }
@@ -120,7 +115,6 @@ import java.util.List;
         public void setClinica(Clinica clinica) {
             this.clinica = clinica;
         }
-
 
 }
 
