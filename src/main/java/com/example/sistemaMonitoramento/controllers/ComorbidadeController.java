@@ -20,14 +20,14 @@ public class ComorbidadeController {
         this.comorbidadeFacade = comorbidadeFacade;
     }
 
-    @GetMapping("/buscar-comorbidades")
+    @GetMapping("/comorbidades")
     public ResponseEntity<List<Comorbidade>> buscarTodos() {
         List<Comorbidade> comorbidades = comorbidadeFacade.buscarTodos();
 
         return ResponseEntity.ok(comorbidades);
     }
 
-    @GetMapping("/buscar-comorbidade/{id}")
+    @GetMapping("/comorbidade/{id}")
     public ResponseEntity<Comorbidade> buscarPorId(@PathVariable int id) {
         Comorbidade comorbidade = comorbidadeFacade.buscarPorId(id);
         if (comorbidade == null)
@@ -36,21 +36,21 @@ public class ComorbidadeController {
         return ResponseEntity.ok(comorbidade);
     }
 
-    @PutMapping("/up-comorbidade/{id}")
+    @PutMapping("/comorbidade/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Comorbidade comorbidade) {
         comorbidadeFacade.atualizarComorbidade(id, comorbidade);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/add-comorbidade")
+    @PostMapping("/comorbidade")
     public ResponseEntity<Void> adicionar(@RequestBody Comorbidade comorbidade) {
         comorbidadeFacade.adicionar(comorbidade);
 
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("/del-comorbidade/{id}")
+    @DeleteMapping("/comorbidade/{id}")
     public ResponseEntity<Void> remover(@PathVariable int id) {
         comorbidadeFacade.remover(id);
 

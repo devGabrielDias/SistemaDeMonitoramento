@@ -22,14 +22,14 @@ public class PacienteController {
             this.pacienteFacade = pacienteFacade;
         }
 
-        @GetMapping("/buscar-pacientes")
+        @GetMapping("/pacientes")
         public ResponseEntity<List<Paciente>> buscarTodos() {
             List<Paciente> pacientes = pacienteFacade.buscarTodos();
 
             return ResponseEntity.ok(pacientes);
         }
 
-        @GetMapping("/buscar-paciente/{id}")
+        @GetMapping("/paciente/{id}")
         public ResponseEntity<Paciente> buscarPorId(@PathVariable int id) {
             Paciente paciente = pacienteFacade.buscarPorId(id);
             if (paciente == null)
@@ -38,21 +38,21 @@ public class PacienteController {
             return ResponseEntity.ok(paciente);
         }
 
-        @PutMapping("/up-paciente/{id}")
+        @PutMapping("/paciente/{id}")
         public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody Paciente paciente) {
             pacienteFacade.atualizarPaciente(id, paciente);
 
             return ResponseEntity.ok(null);
         }
 
-        @PostMapping("/add-paciente")
+        @PostMapping("/paciente")
         public ResponseEntity<Void> adicionar(@RequestBody Paciente paciente) {
             pacienteFacade.adicionar(paciente);
 
             return ResponseEntity.ok(null);
         }
 
-        @DeleteMapping("/del-paciente/{id}")
+        @DeleteMapping("/paciente/{id}")
         public ResponseEntity<Void> remover(@PathVariable int id) {
             pacienteFacade.remover(id);
 

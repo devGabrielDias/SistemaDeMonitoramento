@@ -24,8 +24,8 @@ public class PacienteRepository implements IPacienteRepository {
         Clinica clinica = entityManager.find(Clinica.class, paciente.getClinica().getId());
         paciente.setClinica(clinica);
 
-        Comorbidade comorbidade = entityManager.find(Comorbidade.class, paciente.getComorbidade().getId());
-        paciente.setComorbidade(comorbidade);
+        //Comorbidade comorbidade = entityManager.find(Comorbidade.class, paciente.getComorbidade().getId());
+        //paciente.setComorbidade(comorbidade);
 
         entityManager.persist(paciente);
 //        this.entityManager.persist(paciente);

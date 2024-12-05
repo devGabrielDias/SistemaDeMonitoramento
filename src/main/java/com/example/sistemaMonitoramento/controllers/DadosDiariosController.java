@@ -20,14 +20,14 @@ public class DadosDiariosController {
         this.dadosDiariosFacade = dadosDiariosFacade;
     }
 
-    @GetMapping("/buscar-dados")
+    @GetMapping("/dadosdiarios")
     public ResponseEntity<List<DadosDiarios>> buscarTodos() {
         List<DadosDiarios> dadosDiarios = dadosDiariosFacade.buscarTodos();
 
         return ResponseEntity.ok(dadosDiarios);
     }
 
-    @GetMapping("/buscar-Dado/{id}")
+    @GetMapping("/dadosdiarios/{id}")
     public ResponseEntity<DadosDiarios> buscarPorId(@PathVariable int id) {
         DadosDiarios dadosDiarios = dadosDiariosFacade.buscarPorId(id);
         if (dadosDiarios == null)
@@ -36,21 +36,21 @@ public class DadosDiariosController {
         return ResponseEntity.ok(dadosDiarios);
     }
 
-    @PutMapping("/up-dadosdiarios/{id}")
+    @PutMapping("/dadosdiarios/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable int id, @RequestBody DadosDiarios dadosDiarios) {
         dadosDiariosFacade.atualizarDadosDiarios(id, dadosDiarios);
 
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/add-dadosdiarios")
+    @PostMapping("/dadosdiarios")
     public ResponseEntity<Void> adicionar(@RequestBody DadosDiarios dadosDiarios) {
         dadosDiariosFacade.adicionar(dadosDiarios);
 
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping("/del-dadosdiarios/{id}")
+    @DeleteMapping("/dadosdiarios/{id}")
     public ResponseEntity<Void> remover(@PathVariable int id) {
         dadosDiariosFacade.remover(id);
 
