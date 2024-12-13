@@ -54,5 +54,7 @@ public class SecurityConfig {
                 http.csrf(csrf -> csrf.disable()); // Desabilitando CSRF para simplificação de teste
 
         return http.build();
+
+
     }
 }
