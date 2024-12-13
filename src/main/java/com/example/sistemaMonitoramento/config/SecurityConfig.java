@@ -35,6 +35,8 @@ public class SecurityConfig {
         );
 
         return jdbcUserDetailsManager;
+
+
     }
 
     @Bean
